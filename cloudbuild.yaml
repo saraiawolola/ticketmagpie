@@ -2,7 +2,7 @@ steps:
   # Step 1: Pull the base Docker image from Docker Hub
   - name: 'gcr.io/cloud-builders/docker'
     args: ['pull', 'frolvlad/alpine-oraclejdk8:slim']
-    secretEnv: ['USERNAME', 'PASSWORD']
+    # secretEnv: ['USERNAME', 'PASSWORD']
 
 
   # Step 2: Copy the JAR file to the Cloud Build workspace
