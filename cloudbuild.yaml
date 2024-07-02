@@ -19,12 +19,12 @@ steps:
 
 # Secrets and substitutions
 
- availableSecrets:
-   secretManager:
-   - versionName: projects/193904097419/secrets/docker-password/versions/1
-     env: 'PASSWORD'
-   - versionName: projects/193904097419/secrets/docker-username/versions/1
-     env: 'USERNAME'
+#  availableSecrets:
+#    secretManager:
+#    - versionName: projects/193904097419/secrets/docker-password/versions/1
+#      env: 'PASSWORD'
+#    - versionName: projects/193904097419/secrets/docker-username/versions/1
+#      env: 'USERNAME'
 
 
 substitutions:
