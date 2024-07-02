@@ -1,0 +1,38 @@
+steps:
+  # Step 1: Pull the base Docker image from Docker Hub
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['pull', 'frolvlad/alpine-oraclejdk8:slim']
+    secretEnv: ['USERNAME', 'PASSWORD']
+
+
+  # Step 2: Copy the JAR file to the Cloud Build workspace
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '--tag=gcr.io/$PROJECT_ID/ticketmagpie:latest'
+      - '--file=Dockerfile'
+      - '.'
+
+  # Step 3: Push the built Docker image to Google Container Registry (GCR)
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/ticketmagpie:latest']
+
+# Secrets and substitutions
+
+ availableSecrets:
+   secretManager:
+   - versionName: projects/193904097419/secrets/docker-password/versions/1
+     env: 'PASSWORD'
+   - versionName: projects/193904097419/secrets/docker-username/versions/1
+     env: 'USERNAME'
+
+
+substitutions:
+  _DOCKERFILE: 'Dockerfile'
+  PROJECT_ID: 'testmagpie'
+
+# # Timeout and logs configuration
+# options:
+#   machineType: 'N1_HIGHCPU_8'
+#   logging: CLOUD_LOGGING_ONLY
+#   timeout: 1800s
